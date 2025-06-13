@@ -30,10 +30,7 @@ jobs:
 
       - name: Get Flutter dependencies
         run: flutter pub get
-
-      - name: Show dependency tree
-        run: flutter pub deps -- --style=compact
-
+        
       - name: Build APK (release)
         run: flutter build apk --release
 
