@@ -1,5 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.9.10' // Keep Kotlin version consistent with dependencies
+
     repositories {
         google()
         mavenCentral()
@@ -7,7 +8,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Remove any Flutter plugin from here; it's now applied in app/build.gradle using plugins block
     }
 }
 
@@ -19,10 +21,9 @@ allprojects {
 }
 
 rootProject.buildDir = '../build'
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(':app')
 }
 
