@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services'
+// Remove this if you don't need Google services
+// apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "com.example.hc05_module_controller"
@@ -18,12 +19,20 @@ android {
 
     buildTypes {
         release {
-            // Default Flutter signing config (debug key unless manually set)
             signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
