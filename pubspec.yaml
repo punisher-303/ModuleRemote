@@ -29,13 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  onesignal_flutter: ^3.3.0
-  
-dependencies:
-  flutter:
-    sdk: flutter
   flutter_bluetooth_serial: ^0.4.0
-  
 
 
   # The following adds the Cupertino Icons font to your application.
