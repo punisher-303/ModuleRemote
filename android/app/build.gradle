@@ -1,20 +1,31 @@
+// ✅ These lines must be at the top
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-// Remove this if you don't need Google services
-// apply plugin: 'com.google.gms.google-services'
+
+// ✅ This line is crucial to integrate Flutter with Android build system
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.hc05_module_controller"
-    compileSdkVersion 34
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
     defaultConfig {
         applicationId "com.example.hc05_module_controller"
-        minSdkVersion 24
-        targetSdkVersion 34
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
     }
 
     buildTypes {
@@ -36,11 +47,7 @@ android {
     }
 }
 
-flutter {
-    source '../..'
-}
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.multidex:multidex:2.0.1'
 }
