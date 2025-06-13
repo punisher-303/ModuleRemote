@@ -1,0 +1,53 @@
+name: "Build & Release"
+
+on:
+  workflow_dispatch:
+    branches: main
+    
+
+jobs:
+    build:
+        name: Build & Release
+        runs-on: windows-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup-Java
+              uses: actions/setup-java@v3.12.0
+              with:
+                distribution: 'oracle'
+                java-version: '17'
+
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                flutter-version: '3.24.0'
+                channel: 'stable'
+
+            - name: Install Dependencies
+              run: flutter pub get
+            
+
+            - name: Build App files
+              run: lutter build apk --release
+
+            - name: Rename APK file
+              run: |
+                  Rename-Item -Path "build/app/outputs/flutter-apk/app-release.apk" -NewName "hc05remotecontroller.apk"
+           
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: Release
+                path: |
+                  build/app/outputs/flutter-apk/hc05remotecontroller.apk
+            - name: Create Release
+              uses: ncipollo/release-action@v1
+              with:
+                artifacts: |
+                  build/app/outputs/flutter-apk/hc05remotecontroller.apk
+                                 
+                tag: v1.0.0
+                token: ${{secrets.SECRET_KEY}}
+                prerelease: true
