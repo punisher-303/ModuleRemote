@@ -1,5 +1,5 @@
-name: onesignal_and_flutter
-description: Onesignal Flutter integration sample
+name: hc05_module_controller
+description: A remote app to control HC-05 via Bluetooth
 
 publish_to: 'none'
 
