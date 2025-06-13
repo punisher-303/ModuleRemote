@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 // ✅ This line is crucial to integrate Flutter with Android build system
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+//apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.hc05_module_controller"
