@@ -28,7 +28,6 @@ jobs:
             - name: Install Dependencies
               run: flutter pub get
             
-
             - name: Build App files
               run: lutter build apk --release
 
