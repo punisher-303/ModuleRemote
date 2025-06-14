@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
   flutter_bluetooth_serial: ^0.4.0
   cupertino_icons: ^1.0.2
-  onesignal_flutter: ^3.0.0 # Optional: Add this if you're integrating OneSignal
+  onesignal_flutter: ^5.3.3 # Optional: Add this if you're integrating OneSignal
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
