@@ -4,10 +4,9 @@ apply plugin: 'dev.flutter.flutter-gradle-plugin'
 
 android {
     namespace 'com.example.hc05_module_controller'
-    compileSdkVersion flutter.compileSdkVersion
-    
-    // Override NDK version as required by plugins
-    ndkVersion "27.0.12077973"
+    compileSdkVersion 34
+
+    ndkVersion "27.0.12077973" // required by flutter_bluetooth_serial & onesignal_flutter
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -20,15 +19,30 @@ android {
 
     defaultConfig {
         applicationId "com.example.hc05_module_controller"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 34
         versionCode flutter.versionCode
         versionName flutter.versionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+            // TODO: Add your real release signing info here
+            storeFile file("key.jks")
+            storePassword "your-store-password"
+            keyAlias "your-key-alias"
+            keyPassword "your-key-password"
+        }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            // ⚠️ Disable minify temporarily if R8 causes issues
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
