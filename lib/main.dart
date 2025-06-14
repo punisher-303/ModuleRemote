@@ -54,6 +54,7 @@ class _BluetoothHomePageState extends State<BluetoothHomePage> {
 
     try {
       final conn = await BluetoothConnection.toAddress(device.address);
+      if (!mounted) return; // <-- guard here
       setState(() {
         connection = conn;
         selectedDevice = device;
@@ -61,17 +62,20 @@ class _BluetoothHomePageState extends State<BluetoothHomePage> {
       });
 
       connection!.input!.listen(null).onDone(() {
+        if (!mounted) return; // <-- guard here
         setState(() {
           isConnected = false;
           connection = null;
         });
       });
     } catch (e) {
+      if (!mounted) return; // <-- guard here
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Cannot connect: $e')),
       );
     }
 
+    if (!mounted) return; // <-- guard here
     setState(() {
       isConnecting = false;
     });
@@ -91,11 +95,13 @@ class _BluetoothHomePageState extends State<BluetoothHomePage> {
         connection!.output.add(Uint8List.fromList(data.codeUnits));
         await connection!.output.allSent;
       } catch (e) {
+        if (!mounted) return; // <-- guard here
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error sending data: $e')),
         );
       }
     } else {
+      if (!mounted) return; // <-- guard here
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Not connected to any device')),
       );
