@@ -11,10 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bluetooth_serial:
-  git:
-    url: https://github.com/yourusername/flutter_bluetooth_serial.git
-    ref: fix-namespace-branch
+  flutter_bluetooth_serial: ^0.4.0
   cupertino_icons: ^1.0.2
   onesignal_flutter: ^5.3.3 # Optional: Add this if you're integrating OneSignal
 
