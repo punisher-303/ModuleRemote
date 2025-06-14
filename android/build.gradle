@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Optional: change the build directory for root and subprojects
+gradle.projectsEvaluated {
+    rootProject.buildDir = "../../build" as File
+
+    subprojects.each { subproject ->
+        subproject.buildDir = new File(rootProject.buildDir, subproject.name)
+    }
+}
+
+// Clean task
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
