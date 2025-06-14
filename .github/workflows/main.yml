@@ -31,27 +31,27 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Fix flutter_bluetooth_serial namespace issue
+      - name: Patch flutter_bluetooth_serial AndroidManifest.xml
         run: |
-          PLUGIN_DIR="$HOME/.pub-cache/hosted/pub.dev/flutter_bluetooth_serial-0.4.0/android"
-          if [ -d "$PLUGIN_DIR" ]; then
-            echo "Checking flutter_bluetooth_serial build.gradle for namespace..."
-            if ! grep -q "namespace" "$PLUGIN_DIR/build.gradle"; then
-              echo "Adding namespace to flutter_bluetooth_serial build.gradle"
-              echo -e "\nandroid {\n    namespace 'io.github.edufolly.flutter_bluetooth_serial'\n}" >> "$PLUGIN_DIR/build.gradle"
-            else
-              echo "Namespace already specified."
-            fi
-          else
-            echo "Plugin directory not found. Skipping namespace fix."
-          fi  
+         echo "Searching for flutter_bluetooth_serial plugin..."
+         find . -type f -name "AndroidManifest.xml" | grep flutter_bluetooth_serial || echo "Plugin not found!"
+    
+         PLUGIN_PATH=$(find . -type f -name "AndroidManifest.xml" | grep flutter_bluetooth_serial | head -n 1)
+    
+         if [ -n "$PLUGIN_PATH" ]; then
+           echo "Found: $PLUGIN_PATH"
+           sed -i '/package="io.github.edufolly.flutterbluetoothserial"/d' "$PLUGIN_PATH"
+         else
+           echo "❌ flutter_bluetooth_serial AndroidManifest.xml not found."
+           exit 1
+         fi
         
       - name: Patch flutter_bluetooth_serial AndroidManifest.xml
         run: |
           PLUGIN_PATH=$(find . -path "*/flutter_bluetooth_serial*/android/src/main/AndroidManifest.xml" | head -n 1)
           echo "Patching: $PLUGIN_PATH"
           sed -i '/package="io.github.edufolly.flutterbluetoothserial"/d' "$PLUGIN_PATH"
-          
+
       - name: Build APK (release)
         run: flutter build apk --release
 
