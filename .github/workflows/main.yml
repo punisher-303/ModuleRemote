@@ -55,9 +55,12 @@ jobs:
             echo "❌ AndroidManifest.xml not found!"
             exit 1
           fi
-          
+      
       - name: Build APK (release)
-        run: flutter build apk --release
+        run: cd android && ./gradlew clean   
+      
+      - name: Build APK (release)
+        run: flutter build apk --release --verbose
 
       - name: Rename APK file
         run: |
