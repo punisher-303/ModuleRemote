@@ -14,14 +14,26 @@ allprojects {
 
 // Optional: change the build directory for root and subprojects
 gradle.projectsEvaluated {
-    rootProject.buildDir = "../../build" as File
+    rootProject.buildDir = file("../../build")
 
     subprojects.each { subproject ->
         subproject.buildDir = new File(rootProject.buildDir, subproject.name)
     }
 }
 
-// Clean task
+// Force namespace for subprojects missing it (workaround for plugin issue)
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
+            project.android {
+                if (!project.hasProperty("namespace") || project.namespace == null || project.namespace == "") {
+                    project.namespace = "com.example.hc05_module_controller"  // Replace with your app's namespace
+                }
+            }
+        }
+    }
+}
+
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
