@@ -5,7 +5,9 @@ apply plugin: 'dev.flutter.flutter-gradle-plugin'
 android {
     namespace 'com.example.hc05_module_controller'
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    
+    // Override NDK version as required by plugins
+    ndkVersion "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
