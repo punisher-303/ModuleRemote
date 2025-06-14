@@ -56,8 +56,8 @@ jobs:
             exit 1
           fi
       
-      - name: Build APK (release)
-        run: cd android && ./gradlew clean   
+      # - name: Build APK (release)
+      #   run: cd android && ./gradlew clean   
       
       - name: Build APK (release)
         run: flutter build apk --release --verbose
