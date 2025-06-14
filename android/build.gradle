@@ -13,7 +13,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.3.0'  // Updated AGP version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        // No app dependencies here
     }
 }
 
@@ -34,15 +33,18 @@ gradle.projectsEvaluated {
 
 subprojects {
     afterEvaluate { project ->
-        def androidExt = project.extensions.findByName("android")
-        if (androidExt != null) {
-            try {
-                def ns = androidExt.hasProperty("namespace") ? androidExt.namespace : null
-                if (ns == null || ns.trim().isEmpty()) {
-                    androidExt.namespace = "com.example.hc05_module_controller" // Replace with your package name
-                }
-            } catch (Exception e) {
-                // Safely ignore errors here
+        def android = project.extensions.findByName("android")
+        if (android != null) {
+            // ✅ Enforce SDK and Java compatibility on all modules
+            android.compileSdkVersion = rootProject.ext.compileSdkVersion
+            android.buildToolsVersion = rootProject.ext.buildToolsVersion
+
+            android.compileOptions.sourceCompatibility = JavaVersion.VERSION_11
+            android.compileOptions.targetCompatibility = JavaVersion.VERSION_11
+
+            // ✅ Set default namespace if missing
+            if (!android.hasProperty('namespace') || android.namespace == null || android.namespace.trim().isEmpty()) {
+                android.namespace = "com.example.hc05_module_controller"
             }
         }
     }
