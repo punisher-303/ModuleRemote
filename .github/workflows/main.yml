@@ -1,81 +1,46 @@
-name: Build & Release
+name: "Build & Release"
 
 on:
   workflow_dispatch:
-    branches: [main]
+    branches: main
+    
 
 jobs:
-  build:
-    name: Build & Release APK
-    runs-on: ubuntu-latest
+    build:
+        name: Build & Release
+        runs-on: windows-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+            - name: Setup-Java
+              uses: actions/setup-java@v3.12.0
+              with:
+                distribution: 'oracle'
+                java-version: '17'
+                
+            - name: Install Dependencies
+              run: npm install
 
-      - name: Setup Java JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17
+            - name: Build App file
+              run: cd android && ./gradlew assembleDebug
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.0'
-          channel: 'stable'
-
-      - name: Clean Flutter project
-        run: flutter clean
-
-      - name: Get Flutter dependencies
-        run: flutter pub get
-
-      - name: Fix flutter_bluetooth_serial namespace issue
-        run: |
-          PLUGIN_DIR="$HOME/.pub-cache/hosted/pub.dev/flutter_bluetooth_serial-0.4.0/android"
-          if [ -d "$PLUGIN_DIR" ]; then
-            echo "Checking flutter_bluetooth_serial build.gradle for namespace..."
-            if ! grep -q "namespace" "$PLUGIN_DIR/build.gradle"; then
-              echo "Adding namespace to flutter_bluetooth_serial build.gradle"
-              echo -e "\nandroid {\n    namespace 'io.github.punisher-303.flutter_bluetooth_serial'\n}" >> "$PLUGIN_DIR/build.gradle"
-            else
-              echo "Namespace already specified."
-            fi
-          else
-            echo "Plugin directory not found. Skipping namespace fix."
-          fi  
-        
-      - name: Patch flutter_bluetooth_serial AndroidManifest
-        run: |
-          MANIFEST_PATH=$(find $HOME/.pub-cache -path "*/flutter_bluetooth_serial*/android/src/main/AndroidManifest.xml" | head -n 1)
-          if [ -f "$MANIFEST_PATH" ]; then
-            sed -i '/package="io.github.punisher-303.flutterbluetoothserial"/d' "$MANIFEST_PATH"
-          else
-            echo "❌ AndroidManifest.xml not found!"
-            exit 1
-          fi
-      
-      # - name: Build APK (release)
-      #   run: cd android && ./gradlew clean   
-      
-      - name: Build APK (release)
-        run: flutter build apk --release
-
-      - name: Rename APK file
-        run: |
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/hc05_module_controller.apk
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: hc05_module_controller_apk
-          path: build/app/outputs/flutter-apk/hc05_module_controller.apk
-
-      - name: Create GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: v1.0.0
-          artifacts: build/app/outputs/flutter-apk/hc05_module_controller.apk
-          token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: true
+            - name: Rename APK file
+              run: Rename-Item -Path "android/app/build/outputs/apk/debug/app-debug.apk" -NewName "hc05controller.apk"
+            
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: Release
+                path: |
+                  android/app/build/outputs/apk/debug/hc05controller.apk
+            - name: Create Release
+              uses: ncipollo/release-action@v1
+              with:
+                artifacts: |
+                  android/app/build/outputs/apk/debug/hc05controller.apk
+                tag: v1.0.0
+                token: ${{secrets.SECRET_KEY}}
+                prerelease: true
+                allowUpdates: true
+                omitBody: true

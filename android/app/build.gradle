@@ -1,52 +1,43 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'dev.flutter.flutter-gradle-plugin'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
 
 android {
-    namespace 'com.example.hc05_module_controller'
-    compileSdkVersion 34
-    buildToolsVersion "34.0.0"
-
-    ndkVersion "27.0.12077973"
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-
-        // Enable desugaring for Java 11+ APIs used by some libs
-        coreLibraryDesugaringEnabled true
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    lintOptions {
-    abortOnError false
-    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.hc05_module_controller"
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode flutter.versionCode
-        versionName flutter.versionName
-        multiDexEnabled true
+        applicationId "com.hc05controller"  // Change as needed
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             shrinkResources false
-            // No signingConfig for default debug signing
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
-flutter {
-    source '../..'
-}
-
 dependencies {
-    implementation "androidx.window:window:1.0.0"
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'  // Add this line
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
