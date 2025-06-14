@@ -46,20 +46,15 @@ jobs:
             echo "Plugin directory not found. Skipping namespace fix."
           fi  
         
-      - name: Patch flutter_bluetooth_serial AndroidManifest.xml
+      - name: Patch flutter_bluetooth_serial AndroidManifest
         run: |
-         echo "Searching for flutter_bluetooth_serial plugin..."
-         find . -type f -name "AndroidManifest.xml" | grep flutter_bluetooth_serial || echo "Plugin not found!"
-    
-         PLUGIN_PATH=$(find . -type f -name "AndroidManifest.xml" | grep flutter_bluetooth_serial | head -n 1)
-    
-         if [ -n "$PLUGIN_PATH" ]; then
-           echo "Found: $PLUGIN_PATH"
-           sed -i '/package="io.github.edufolly.flutterbluetoothserial"/d' "$PLUGIN_PATH"
-         else
-           echo "❌ flutter_bluetooth_serial AndroidManifest.xml not found."
-           exit 1
-         fi
+          MANIFEST_PATH=$(find $HOME/.pub-cache -path "*/flutter_bluetooth_serial*/android/src/main/AndroidManifest.xml" | head -n 1)
+          if [ -f "$MANIFEST_PATH" ]; then
+            sed -i '/package="io.github.edufolly.flutterbluetoothserial"/d' "$MANIFEST_PATH"
+          else
+            echo "❌ AndroidManifest.xml not found!"
+            exit 1
+          fi
           
       - name: Build APK (release)
         run: flutter build apk --release

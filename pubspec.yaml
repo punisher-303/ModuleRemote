@@ -14,7 +14,7 @@ dependencies:
 
   flutter_bluetooth_serial:
     git:
-      url: https://github.com/edufolly/flutter_bluetooth_serial.git
+      url: https://github.com/punisher-303/flutter_bluetooth_serial.git
       ref: master
 
   cupertino_icons: ^1.0.2
