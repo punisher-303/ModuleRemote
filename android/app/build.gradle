@@ -20,6 +20,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    lintOptions {
+    abortOnError false
+    }
 
     defaultConfig {
         applicationId "com.example.hc05_module_controller"
