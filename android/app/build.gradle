@@ -5,8 +5,9 @@ apply plugin: 'dev.flutter.flutter-gradle-plugin'
 android {
     namespace 'com.example.hc05_module_controller'
     compileSdkVersion 34
+    buildToolsVersion "34.0.0"
 
-    ndkVersion "27.0.12077973" // required by flutter_bluetooth_serial & onesignal_flutter
+    ndkVersion "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -30,11 +31,14 @@ android {
         release {
             minifyEnabled false
             shrinkResources false
-            // No signingConfig here, so it will use default debug signing
         }
     }
 }
 
 flutter {
     source '../..'
+}
+
+dependencies {
+    implementation "androidx.window:window:1.0.0"
 }
