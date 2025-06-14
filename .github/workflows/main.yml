@@ -60,7 +60,7 @@ jobs:
       #   run: cd android && ./gradlew clean   
       
       - name: Build APK (release)
-        run: flutter build apk --release --verbose
+        run: flutter build apk --release
 
       - name: Rename APK file
         run: |
