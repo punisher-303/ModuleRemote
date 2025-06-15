@@ -5,8 +5,8 @@ buildscript {
         minSdkVersion = 23
         compileSdkVersion = 34
         targetSdkVersion = 34
-        ndkVersion = "26.1.10909125"
-        kotlinVersion = "1.9.22"
+        ndkVersion = "25.1.8937393"
+        kotlinVersion = "1.8.22"
         //ffmpegKitPackage = "https-gpl"
         castFrameworkVersion = "21.4.0" // Use a version compatible with Kotlin 1.9.x
     }
@@ -19,6 +19,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
+apply plugin: "com.facebook.react.rootproject"
 
 allprojects {
     repositories {

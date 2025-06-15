@@ -1,8 +1,9 @@
 apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "kotlin-android"
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     namespace 'com.hc05controller'
 
     defaultConfig {
@@ -47,4 +48,5 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation("com.facebook.react:flipper-integration")
 }
