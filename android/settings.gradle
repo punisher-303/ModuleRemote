@@ -5,4 +5,9 @@ applyNativeModulesSettingsGradle(settings)
 
 include ':app'
 
+// ✅ Add this block to manually link the Bluetooth Classic package
+include ':react-native-bluetooth-classic'
+project(':react-native-bluetooth-classic').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bluetooth-classic/android')
+
+// ✅ Required for newer React Native versions (RN 0.71+)
 includeBuild('../node_modules/@react-native/gradle-plugin')
