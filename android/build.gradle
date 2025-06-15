@@ -28,3 +28,5 @@ allprojects {
         maven { url "$rootDir/../node_modules/react-native/android" }
     }
 }
+
+apply plugin: "com.facebook.react.rootproject"
