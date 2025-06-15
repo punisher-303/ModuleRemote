@@ -10,8 +10,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-// ✅ Correct package path
-import com.rnbtclassic.BluetoothClassicPackage;
+// ✅ Corrected import path for the Bluetooth package
+import kjd.reactnative.bluetooth.RNBluetoothClassicPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -25,7 +25,7 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
           return Arrays.<ReactPackage>asList(
-            new BluetoothClassicPackage()
+            new RNBluetoothClassicPackage() // ✅ Correct class name
           );
         }
 
