@@ -5,7 +5,7 @@ apply plugin: "com.facebook.react"
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
-    namespace 'com.hc05controller'
+    namespace "com.hc05controller" // 👈 Set namespace here
 
     defaultConfig {
         applicationId "com.hc05controller"
