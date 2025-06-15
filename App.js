@@ -8,16 +8,18 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import BluetoothSerial from 'react-native-bluetooth-serial-next';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 export default function App() {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
     requestPermissions();
-    BluetoothSerial.isEnabled().then((enabled) => {
-      if (!enabled) BluetoothSerial.enable();
-    });
+    RNBluetoothClassic.isEnabled()
+      .then(enabled => {
+        if (!enabled) RNBluetoothClassic.requestEnabled();
+      })
+      .catch(err => Alert.alert('Bluetooth Error', err.message));
   }, []);
 
   async function requestPermissions() {
@@ -27,9 +29,7 @@ export default function App() {
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       ]);
-      if (
-        granted['android.permission.ACCESS_FINE_LOCATION'] !== 'granted'
-      ) {
+      if (granted['android.permission.ACCESS_FINE_LOCATION'] !== 'granted') {
         Alert.alert('Permission required', 'Location permission is needed for Bluetooth to work');
       }
     }
@@ -37,11 +37,11 @@ export default function App() {
 
   const connectToHC05 = async () => {
     try {
-      const devices = await BluetoothSerial.list();
-      const hc05 = devices.find((d) => d.name === 'HC-05');
+      const devices = await RNBluetoothClassic.getBondedDevices();
+      const hc05 = devices.find(d => d.name === 'HC-05');
       if (hc05) {
-        const connected = await BluetoothSerial.connect(hc05.id);
-        setConnected(connected);
+        const connectedDevice = await RNBluetoothClassic.connect(hc05.address);
+        setConnected(!!connectedDevice);
         Alert.alert('Connected', `Connected to ${hc05.name}`);
       } else {
         Alert.alert('Device not found', 'HC-05 not found');
@@ -53,7 +53,11 @@ export default function App() {
 
   const sendCommand = async (cmd) => {
     if (connected) {
-      await BluetoothSerial.write(cmd);
+      try {
+        await RNBluetoothClassic.write(cmd);
+      } catch (err) {
+        Alert.alert('Send Error', err.message);
+      }
     } else {
       Alert.alert('Not connected', 'Please connect to HC-05 first');
     }
@@ -89,3 +93,24 @@ export default function App() {
     </SafeAreaView>
   );
 }
+
+// Optional helper for connect + send in one step
+export const connectAndSend = async (cmd) => {
+  try {
+    const devices = await RNBluetoothClassic.getBondedDevices();
+    const hc05 = devices.find(d => d.name === 'HC-05');
+    if (hc05) {
+      const connectedDevice = await RNBluetoothClassic.connect(hc05.address);
+      if (connectedDevice) {
+        await RNBluetoothClassic.write(cmd);
+        Alert.alert('Sent', `Sent "${cmd}" to ${hc05.name}`);
+      } else {
+        Alert.alert('Connection Failed', 'Could not connect to HC-05');
+      }
+    } else {
+      Alert.alert('Device not found', 'HC-05 not found');
+    }
+  } catch (err) {
+    Alert.alert('Error', err.message);
+  }
+};
