@@ -39,7 +39,7 @@ jobs:
               with:
                 artifacts: |
                   android/app/build/outputs/apk/debug/hc05controller.apk
-                tag: v1.0.0
+                tag: v1.0.2
                 token: ${{secrets.SECRET_KEY}}
                 prerelease: true
                 allowUpdates: true
