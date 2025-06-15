@@ -10,6 +10,7 @@ android {
         applicationId "com.hc05controller"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion // 👈 You can use 33 or 34 depending on your setup
         versionCode 1
         versionName "1.0"
     }
