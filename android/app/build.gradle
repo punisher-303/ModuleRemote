@@ -50,5 +50,4 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation("com.facebook.react:react-android")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation("com.facebook.react:flipper-integration")
 }
