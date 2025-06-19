@@ -19,8 +19,8 @@ jobs:
                 distribution: 'oracle'
                 java-version: '17'
                 
-            - name: Install Dependencies
-              run: npm install
+            # - name: Install Dependencies
+            #   run: npm install
 
             - name: Build App file
               run: ./gradlew assembleRelease
