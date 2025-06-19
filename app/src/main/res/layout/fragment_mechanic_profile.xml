@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MechanicProfileFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:indeterminate="true"
+            android:visibility="invisible" />
+
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_pic"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/default_profile" />
+
+            <ImageView
+                android:id="@+id/change_picture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_camera_alt_black_24dp" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/available_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50dp"
+            android:text="Available" />
+
+        <Switch
+            android:id="@+id/available_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/available_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/available_title"
+            android:layout_alignLeft="@id/available_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/dividerColor" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/name_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_person" />
+
+        <TextView
+            android:id="@+id/name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/name_icon"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_title"
+            android:layout_alignLeft="@id/name_title"
+            android:text="Profile Name"
+            android:textColor="@color/primaryText" />
+
+        <ImageView
+            android:id="@+id/edit_name"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@id/name_icon"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_edit" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/name"
+            android:layout_alignLeft="@id/name_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/dividerColor" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/email_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_email" />
+
+        <TextView
+            android:id="@+id/email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/email_icon"
+            android:text="Email" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_title"
+            android:layout_alignLeft="@id/email_title"
+            android:text="email@gmail.com"
+            android:textColor="@color/primaryText" />
+
+        <ImageView
+            android:id="@+id/edit_email"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@id/email_icon"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_edit" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/email"
+            android:layout_alignLeft="@id/email_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/dividerColor" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/phone_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_phone" />
+
+        <TextView
+            android:id="@+id/phone_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/phone_icon"
+            android:text="Phone Number" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_title"
+            android:layout_alignLeft="@id/phone_title"
+            android:text="787656542"
+            android:textColor="@color/primaryText" />
+
+        <ImageView
+            android:id="@+id/edit_phone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@id/phone_icon"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_edit" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/phone"
+            android:layout_alignLeft="@id/phone_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/dividerColor" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Latitude"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter longitude"
+        android:visibility="gone" />
+
+</LinearLayout>

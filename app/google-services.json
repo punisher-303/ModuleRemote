@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "304754546968",
+    "firebase_url": "https://veloxmechanics-77062.firebaseio.com",
+    "project_id": "veloxmechanics-77062",
+    "storage_bucket": "veloxmechanics-77062.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304754546968:android:775c783f03b8486d1e666d",
+        "android_client_info": {
+          "package_name": "com.hfad.veloxmechanics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304754546968-uqpb0blmr3u23kc8780skdkv8dat4p05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hfad.veloxmechanics",
+            "certificate_hash": "ac9f931c62da5501d615c9d889d294bc1a1e0b23"
+          }
+        },
+        {
+          "client_id": "304754546968-rf0dmi2duc6o7lctu2vmuue9vs1o1sos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjtfXbU-LiZiCUDAY_irKUxqYZ0SWrdW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304754546968-rf0dmi2duc6o7lctu2vmuue9vs1o1sos.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

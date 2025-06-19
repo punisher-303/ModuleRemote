@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/container"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/default_profile" />
+
+    <TextView
+        android:id="@+id/time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/profile_pic"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:text="5:31 PM" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/time_stamp"
+        android:layout_toLeftOf="@id/time_stamp"
+        android:layout_toRightOf="@id/profile_pic"
+        android:text="Zabi"
+        android:textColor="@color/primaryText"
+        android:textStyle="bold" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/new_message"
+        android:visibility="invisible"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/time_stamp"
+        android:layout_alignRight="@id/time_stamp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/new_message_cricle" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_name"
+        android:layout_alignLeft="@id/profile_name"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@id/time_stamp"
+        android:lines="1"
+        android:text="Hello where are you" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/message"
+        android:layout_alignLeft="@id/profile_name"
+        android:layout_alignRight="@id/time_stamp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/grey_border_bottom" />
+</RelativeLayout>

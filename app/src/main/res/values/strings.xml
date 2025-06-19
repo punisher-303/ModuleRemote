@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">VeloxMechanics</string>
+    <string name="register_page_title">Create A New Account</string>
+    <string name="register_btn">Register</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_name">Name</string>
+    <string name="logout">Log Out</string>
+    <string name="login_page_title">Login To Your Account</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">signup</string>
+    <string name="add_mechanic">Add New Mechanic</string>
+    <string name="register_mechanic_title">Add A New Mechanic</string>
+    <string name="add_mechanic_btn">Add Mechanic</string>
+
+    <!-- Database Related -->
+    <string name="collection_user">user</string>
+    <string name="collection_user_type">user_type</string>
+    <string name="collection_mechanic">mechanic</string>
+    <string name="web_api_key">AIzaSyA7udptO16x-uqhP3-FYk6cJE-3ux1SsrY</string>
+    <string name="project_name">VeloxMechanics</string>
+    <string name="cached_user_type">user_type</string>
+    <string name="collection_mechanic_location">mechanic_location</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="collection_profile_pic">profile_images</string>
+    <string name="hint_phone">Phone Number</string>
+
+    <string name="google_maps_api_key">AIzaSyCGLpzPR9EDGa2QgIyA_QuiIj4etdIgIfE</string>
+
+    <string name="field_mechanic_location">location</string>
+    <string name="field_mechanic_online">online</string>
+    <string name="field_mechanic_time_stamp">time_stamp</string>
+    <string name="field_mechanic_name">name</string>
+    <string name="field_mechanic_email">email</string>
+    <string name="field_mechanic_phone_number">phone_number</string>
+
+
+    <string name="user_latitude">userLatitude</string>
+    <string name="user_longitude">userLongitude</string>
+    <string name="field_mechanic_specialty">specialty</string>
+    <string name="chat_user">chatUser</string>
+    <string name="collection_messages">messages</string>
+    <string name="collection_chat_images">chat_images</string>
+    <string name="user_name">user_name</string>
+    <string name="current_user">current_user</string>
+    <string name="collection_active_chats">active_chats</string>
+    <string name="sub_collection_active_chat">all_users</string>
+    <string name="user_type">user_type</string>
+    <string name="collection_ratings">ratings</string>
+
+
+</resources>
