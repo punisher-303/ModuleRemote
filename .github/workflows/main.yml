@@ -23,23 +23,23 @@ jobs:
               run: npm install
 
             - name: Build App file
-              run: cd android && ./gradlew assembleRelease
+              run: ./gradlew assembleRelease
 
             - name: Rename APK file
-              run: Rename-Item -Path "android/app/build/outputs/apk/release/app-release.apk" -NewName "Mechanical Amigo.apk"
+              run: Rename-Item -Path "app/build/outputs/apk/release/app-release.apk" -NewName "Mechanical Amigo.apk"
             
             - name: Upload Artifacts
               uses: actions/upload-artifact@v4
               with:
                 name: Release
                 path: |
-                  android/app/build/outputs/apk/release/Mechanical Amigo.apk
+                  app/build/outputs/apk/release/Mechanical Amigo.apk
             - name: Create Release
               uses: ncipollo/release-action@v1
               with:
                 artifacts: |
-                  android/app/build/outputs/apk/release/Mechanical Amigo.apk
-                tag: v1.0.2
+                  app/build/outputs/apk/release/Mechanical Amigo.apk
+                tag: v1.0.6
                 token: ${{secrets.SECRET_KEY}}
                 prerelease: true
                 allowUpdates: true
